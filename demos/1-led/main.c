@@ -5,7 +5,7 @@
 
 int main(void) {
   P1DIR |= LEDS;
-  P1OUT &= ~LED_GREEN; //switching to |= LED_GREEN turns it on
-  P1OUT |= LED_RED; //switching to &= ~LED_RED makes it turn off
+  P1OUT |= LED_GREEN;//switching to P1OUT |= LED_GREEN turns green LED on 
+  P1OUT |= LED_RED;   //switching to P1OUT &= ~LED_RED turns red LED off
   or_sr(0x18);		/* CPU off, GIE on */
 }
