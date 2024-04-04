@@ -1,5 +1,5 @@
 # makfile configuration
-COMMON_OBJECTS  = main.o  # Wdinterrupthandler.o 
+COMMON_OBJECTS  =  
 CPU             = msp430g2553
 CFLAGS          = -mmcu=${CPU} -I../h
 LDFLAGS		= -L/opt/ti/msp430_gcc/include 
@@ -11,8 +11,8 @@ AS              = msp430-elf-as
 all: toy.elf
 
 #additional rules for files
-toy.elf: ${COMMON_OBJECTS} 
-	${CC} ${CFLAGS} ${LDFLAGS} -o $@ $^ library/libTimer.a
+toy.elf: ${COMMON_OBJECTS} p1_interrupt_handler.o led.o switches.o buttonMain.o library/libTimer.a
+	${CC} ${CFLAGS} ${LDFLAGS} -o $@ $^
 
 load: toy.elf
 	msp430loader.sh toy.elf
@@ -20,7 +20,7 @@ load: toy.elf
 clean:
 	rm -f *.o *.elf
 
-main.o: led.h
+#main.o: led.h
 
-wdInterruptHandler.o:  led.h
+#wdInterruptHandler.o:  led.h
 
