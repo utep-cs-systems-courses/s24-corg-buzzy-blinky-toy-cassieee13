@@ -1,5 +1,5 @@
 #include <msp430.h>
-#include "libTimer.h"
+#include "timerLibrary/libTimer.h"
 #include "buzzer.h"
 
 void buzzer_init()
@@ -23,6 +23,7 @@ void buzzer_set_period(short cycles) /* buzzer clock = 2MHz.  (period of 1k resu
   CCR0 = cycles; 
   CCR1 = cycles >> 1;		/* one half cycle */
 }
+
 
 
     

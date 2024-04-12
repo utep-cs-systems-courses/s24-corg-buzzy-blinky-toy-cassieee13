@@ -1,7 +1,7 @@
 #ifndef buzzer_included
 #define buzzer_included
 
-#define C 2100
+//#define C 2100
 #define D 1870
 #define E 1670
 #define F 1580
@@ -10,5 +10,5 @@
 
 void buzzer_init();
 void buzzer_set_period(short cycles);
-
+void buzz();
 #endif // included
