@@ -32,17 +32,20 @@ switch_interrupt_handler()
   char p2val = switch_update_interrupt_sense();
   //switch_state_down = (p2val & S1) ? 0 : 1; //0 when S1 is up
   if( !(p2val & S1) ){
+    switch_state_down = 1;//S1 is down or pressed
     switch_state_changed = 1;
     led_update();
   }
   else if ( !(p2val & S2) ){
+    switch_state_down = 2;
     switch_state_changed = 1;
-    P1OUT ^= LED_RED;
+    led_update();
   }
   else if( !(p2val & S3) ){
+    switch_state_down = 3;
+    switch_state_changed = 1;
+    led_update();
   }
   else if( !(p2val & S4) ){
   }
-  //switch_state_changed = 1;
-  //led_update();
 }

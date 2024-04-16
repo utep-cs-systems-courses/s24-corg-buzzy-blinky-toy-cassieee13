@@ -1,6 +1,7 @@
 #include <msp430.h>
 #include "led.h"
 #include "switches.h"
+#include "buzzer.h"
 #include "timerLibrary/libTimer.h"
 
 //global vars
@@ -23,6 +24,14 @@ void led_update()
     if(switch_state_down == 1){
       enableWDTInterrupts();
       redBlinks = 1;
+    }
+    else if( switch_state_down == 2){
+      //toggle both leds every time you press S2
+      P1OUT ^= LED_GREEN;
+      P1OUT ^= LED_RED;
+    }
+    else if(switch_state_down == 3){
+      buzzer_set_period(1000);
     }
   }
   switch_state_changed = 0;
