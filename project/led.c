@@ -31,7 +31,7 @@ void led_update()
       P1OUT ^= LED_RED;
     }
     else if(switch_state_down == 3){
-      buzzer_set_period(1000);
+     
     }
   }
   switch_state_changed = 0;

@@ -2,6 +2,11 @@
 #include "timerLibrary/libTimer.h"
 #include "buzzer.h"
 
+//global vars
+int timerCount = 0;
+int soundCount = 0;
+int isBuzzerOn = 0;
+
 void buzzer_init()
 {
     /* 
@@ -23,6 +28,8 @@ void buzzer_set_period(short cycles) /* buzzer clock = 2MHz.  (period of 1k resu
   CCR0 = cycles; 
   CCR1 = cycles >> 1;		/* one half cycle */
 }
+
+
 
 
 
