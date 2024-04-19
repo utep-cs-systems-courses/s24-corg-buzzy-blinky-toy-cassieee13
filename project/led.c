@@ -10,6 +10,8 @@ int redBlinks = 0;
 int secondCount = 0;
 int blinkLimit = 5;
 int blinkCount = 0;
+int green = 0;
+char note = 'c';
 
 void led_init()
 {
@@ -26,12 +28,58 @@ void led_update()
       redBlinks = 1;
     }
     else if( switch_state_down == 2){
+      //P1OUT &= LED_GREEN;
       //toggle both leds every time you press S2
-      P1OUT ^= LED_GREEN;
-      P1OUT ^= LED_RED;
+      if(green){
+	P1OUT &= LED_RED;
+	P1OUT ^= LED_GREEN;
+	green = 0;
+      }
+      else{
+	P1OUT ^= LED_GREEN;
+	P1OUT &= ~LED_RED;
+	green = 1;
+      }
     }
     else if(switch_state_down == 3){
-     
+      switch (note){
+      case 'c':
+	buzzer_set_period(1915);
+	note = 'd';
+	break;
+      case 'd':
+	buzzer_set_period(1700);
+	note = 'e';
+	break;
+      case 'e':
+	buzzer_set_period(1519);
+	note = 'f';
+	break;
+      case 'f':
+	buzzer_set_period(1432);
+	note = 'g';
+	break;
+      case 'g':
+	buzzer_set_period(1275);
+	note = 'a';
+	break;
+      case 'a':
+	buzzer_set_period(1136);
+	note = 'b';
+	break;
+      case 'b':
+	buzzer_set_period(1014);
+	note = 'C';
+	break;
+      case 'C':
+	buzzer_set_period(956);
+	note = 'x';
+	break;
+      case 'x':
+	buzzer_set_period(0);
+	note = 'c';
+	break;
+      }
     }
   }
   switch_state_changed = 0;
