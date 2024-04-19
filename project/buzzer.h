@@ -1,14 +1,15 @@
 #ifndef buzzer_included
 #define buzzer_included
 
-//#define C 2100
-#define D 1870
-#define E 1670
-#define F 1580
-#define G 1400
-#define rest 0
+#define LITTLE_C 1915
+#define D 1700
+#define E 1519
+#define F 1432
+#define G 1275
+#define A 1136
+#define B 1014
+#define BIG_C 956
 
 void buzzer_init();
 void buzzer_set_period(short cycles);
-void delay();
 #endif // included

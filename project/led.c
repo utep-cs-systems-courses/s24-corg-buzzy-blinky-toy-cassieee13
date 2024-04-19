@@ -5,13 +5,14 @@
 #include "timerLibrary/libTimer.h"
 
 //global vars
-int redDims = 0;
-int redBlinks = 0;
+char redDims = 0; //boolean
+char redBlinks = 0; //boolean
 int secondCount = 0;
 int blinkLimit = 5;
 int blinkCount = 0;
-int green = 0;
-char note = 'c';
+char green = 0; //boolean
+char note = 'c'; //used for button S3
+int fireCount = 0;
 
 void led_init()
 {
@@ -28,10 +29,9 @@ void led_update()
       redBlinks = 1;
     }
     else if( switch_state_down == 2){
-      //P1OUT &= LED_GREEN;
       //toggle both leds every time you press S2
       if(green){
-	P1OUT &= LED_RED;
+	P1OUT ^= LED_RED;
 	P1OUT ^= LED_GREEN;
 	green = 0;
       }
@@ -44,41 +44,67 @@ void led_update()
     else if(switch_state_down == 3){
       switch (note){
       case 'c':
-	buzzer_set_period(1915);
+	buzzer_set_period(LITTLE_C);
 	note = 'd';
 	break;
       case 'd':
-	buzzer_set_period(1700);
+	buzzer_set_period(D);
 	note = 'e';
 	break;
       case 'e':
-	buzzer_set_period(1519);
+	buzzer_set_period(E);
 	note = 'f';
 	break;
       case 'f':
-	buzzer_set_period(1432);
+	buzzer_set_period(F);
 	note = 'g';
 	break;
       case 'g':
-	buzzer_set_period(1275);
+	buzzer_set_period(G);
 	note = 'a';
 	break;
       case 'a':
-	buzzer_set_period(1136);
+	buzzer_set_period(A);
 	note = 'b';
 	break;
       case 'b':
-	buzzer_set_period(1014);
+	buzzer_set_period(B);
 	note = 'C';
 	break;
       case 'C':
-	buzzer_set_period(956);
+	buzzer_set_period(BIG_C);
 	note = 'x';
 	break;
       case 'x':
 	buzzer_set_period(0);
 	note = 'c';
 	break;
+      }
+    }
+    else if( switch_state_down == 4){
+      int num = fireCount % 2; //either 1 or 0
+      if(fireCount == 0){
+	num = 3;
+      }
+      
+      switch (num){
+      case 0: //even: 2, 4, 6
+	buzzer_set_period(800);
+	P1OUT &= ~LED_RED;
+	P1OUT ^= LED_GREEN;
+	fireCount--;
+	break;
+      case 1: //odd: 1, 3, 5
+	buzzer_set_period(1200);
+	P1OUT &= ~LED_GREEN;
+	P1OUT ^= LED_RED;
+	fireCount--;
+	break;
+      case 3:
+	buzzer_set_period(0);
+	P1OUT &= ~LED_GREEN;
+	P1OUT &= ~LED_RED;
+	fireCount = 6;
       }
     }
   }
