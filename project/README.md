@@ -32,3 +32,7 @@ button is pressed.
   will play in this pattern for 6 button presses, then turn off with no LEDs
   on.
 
+I tested the buttons and for example when you press S3 then S4 and then S3
+again, it will resume on the next tone (re) , it won't restart to the first
+tone (do). and the same if you were to press S4 then S3 and S4 again. 
+

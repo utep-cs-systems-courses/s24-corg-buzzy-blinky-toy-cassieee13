@@ -42,6 +42,9 @@ void led_update()
       }
     }
     else if(switch_state_down == 3){
+      /*
+       This Switch statement executes when S3 is pressed. After each button press occurs, a different note will play. 
+The notes are defined on buzzer.h and I use the buzzer_set_period() that takes an integer as parameter. */
       switch (note){
       case 'c':
 	buzzer_set_period(LITTLE_C);
@@ -88,6 +91,7 @@ void led_update()
       }
       
       switch (num){
+	/* When this switch statement executes, one led will flash and one tone will play. You can press the button six times, then the next button press will turn the LEDs off and the buzzer off. */
       case 0: //even: 2, 4, 6
 	buzzer_set_period(800);
 	P1OUT &= ~LED_RED;

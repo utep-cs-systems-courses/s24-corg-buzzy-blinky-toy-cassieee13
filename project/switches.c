@@ -30,7 +30,7 @@ void
 switch_interrupt_handler()
 {
   char p2val = switch_update_interrupt_sense();
-  //switch_state_down = (p2val & S1) ? 0 : 1; //0 when S1 is up
+  //in led.c, different things happen when switch state down = ?
   if( !(p2val & S1) ){
     switch_state_down = 1;
     switch_state_changed = 1;
